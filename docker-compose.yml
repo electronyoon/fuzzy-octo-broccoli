@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  express:
+    build:
+      context: ./fuzzy-octo-broccoli-express
+      dockerfile: Dockerfile-express
+    ports:
+      - "3001:3001"
+
+  next:
+    build:
+      context: ./fuzzy-octo-broccoli-next
+      dockerfile: Dockerfile-next
+    ports:
+      - "3000:3000"
+
+  process:
+    build:
+      context: ./fuzzy-octo-broccoli-process
+      dockerfile: Dockerfile-process
+
+  sse:
+    build:
+      context: ./fuzzy-octo-broccoli-sse
+      dockerfile: Dockerfile-sse
+    ports:
+      - "3002:3002"

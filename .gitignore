@@ -1,0 +1,5 @@
+**/.env
+**/node_modules
+project-configs.yaml
+project-credentials.yaml
+broccoli-pubsub-project-038778fba3ce.json

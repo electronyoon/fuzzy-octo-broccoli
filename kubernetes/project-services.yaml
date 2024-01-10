@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-service
+spec:
+  selector:
+    app: express
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3001
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: next-service
+spec:
+  selector:
+    app: next
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: process-service
+# spec:
+#   selector:
+#     app: process
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sse-service
+spec:
+  selector:
+    app: sse
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3002
+  type: NodePort

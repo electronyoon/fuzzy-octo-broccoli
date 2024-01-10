@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: express
+  template:
+    metadata:
+      labels:
+        app: express
+    spec:
+      containers:
+        - name: express
+          image: fuzzy-octo-broccoli-express:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - configMapRef:
+                name: express-configmap
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: next-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: next
+  template:
+    metadata:
+      labels:
+        app: next
+    spec:
+      containers:
+        - name: next
+          image: docker.io/library/fuzzy-octo-broccoli-next:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: next-configmap
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: process-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: process
+  template:
+    metadata:
+      labels:
+        app: process
+    spec:
+      containers:
+        - name: process
+          image: docker.io/library/fuzzy-octo-broccoli-process:latest
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: process-configmap
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /app/credentials
+              readOnly: true
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: gcp-credentials
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sse-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sse
+  template:
+    metadata:
+      labels:
+        app: sse
+    spec:
+      containers:
+        - name: sse
+          image: docker.io/library/fuzzy-octo-broccoli-sse:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3002
+          envFrom:
+            - configMapRef:
+                name: sse-configmap
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /app/credentials
+              readOnly: true
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: gcp-credentials
