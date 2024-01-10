@@ -48,16 +48,16 @@ subscription.on('message', async (message) => {
       console.log('Message added to Redis cache');
     } else {
       console.log('Redis not available, using Supabase instead');
-      if (!supabase) {
-        console.log('Supabase not initialized. Reconnecting...');
-        connectToSupabase();
-      }
-      await supabase.from('posts')
-        .insert(JSON.parse(message.data.toString()))
-        .then(console.log)
-        .catch(console.error);
-      console.log('Message added to Supabase');
     }
+    if (!supabase) {
+      console.log('Supabase not initialized. Reconnecting...');
+      connectToSupabase();
+    }
+    await supabase.from('posts')
+      .insert(JSON.parse(message.data.toString()))
+      .then(console.log)
+      .catch(console.error);
+    console.log('Message added to Supabase');
     message.ack();
   } catch (error) {
     console.log(error);
