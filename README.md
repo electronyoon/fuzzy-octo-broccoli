@@ -16,3 +16,4 @@ k8s는 미완입니다. docker-compose로 대체 개발했습니다.
 ├── 📂 testjsons                    : 테스트용 json 파일
 └── 📂 testscripts                  : 파일 가공, 부하테스트 스크립트
 ```
+![Picture1](https://github.com/electronyoon/fuzzy-octo-broccoli/assets/52403430/9c72947e-aa54-4cba-adef-58b9c58bff08)
