@@ -4,6 +4,7 @@
 <br><br>
 
 # 2. 프로젝트 구조
+k8s는 미완입니다. docker-compose로 대체 개발했습니다.
 ```
 .
 ├── 1️⃣ fuzzy-octo-broccoli-express  : 백엔드 서버
